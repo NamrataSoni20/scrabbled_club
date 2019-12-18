@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+<div class="pd-30 pd-sm-40 bg-gray-200 wd-xl-50p">
+<div class="row">
+  <div class="col-md-4">
+    <p>
+      <strong>Winner:</strong>
+      <%= player_full_name(@game.winner_id) %>
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <p>
+      <strong>Loser:</strong>
+      <%= player_full_name(@game.loser_id) %>
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <p>
+      <strong>Winner score:</strong>
+      <%= @game.winner_score %>
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <p>
+      <strong>Loser score:</strong>
+      <%= @game.loser_score %>
+    </p>
+  </div>
+</div>
+<div class="row">
+  <%= link_to 'Edit', edit_game_path(@game) %> |
+  <%= link_to 'Back', games_path %>
+</div>
+</div>

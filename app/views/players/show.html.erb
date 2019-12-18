@@ -1,0 +1,63 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @player.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @player.last_name %>
+</p>
+
+<p>
+  <strong>Phone number:</strong>
+  <%= @player.phone_number %>
+</p>
+
+<p>
+  <strong>Joining date:</strong>
+  <%= @player.joining_date %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @player.address %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @player.email %>
+</p>
+
+<p>
+  <strong>No. of wins :</strong>
+  <%= no_of_wins(@player.id) %>
+</p>
+<p>
+  <strong>No. of losses :</strong>
+  <%= no_of_losses(@player.id) %>
+</p>
+<p>
+  <strong>Average score :</strong>
+  <%= average_score(@player.id) %>
+</p>
+<p>
+  <% highest_winning_score_details = hieghest_score(@player.id) %>
+  <%if highest_winning_score_details.present?%>
+  <strong>Highest score details :</strong>
+  </br>
+  <strong>Opponent Name:</strong>
+  <%  opp_name = get_opponent_name(highest_winning_score_details, @player.id) if highest_winning_score_details
+  %>
+  <%= opp_name %>
+  </br>
+  <strong>Highest score:</strong>
+  <%= highest_winning_score_details.try(:winner_score) %>
+  </br>
+  <strong>Date & Time:</strong>
+  <%= highest_winning_score_details.try(:created_at).strftime("%d/%m/%Y at %I:%M%p") if highest_winning_score_details.present? %>
+  <%end%>
+</p>
+<%= link_to 'Edit', edit_player_path(@player) %> |
+<%= link_to 'Back', players_path %>

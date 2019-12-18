@@ -1,0 +1,73 @@
+<%= form_with(model: game, local: true) do |form| %>
+  <% if game.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(game.errors.count, "error") %> prohibited this game from being saved:</h2>
+
+      <ul>
+        <% game.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="row">
+    <div class="col-md-4">
+    <%= form.label "Player 1"%>
+    </div>
+    <div class="col-md-8 mg-t-5 mg-md-t-0">
+    <%= collection_select(:game, :winner_id, @players, :id, :full_name, prompt: true) %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+    <%= form.label "Player 2", class: "form-label mg-b-0" %>
+    </div>
+    <div class="col-md-8 mg-t-5 mg-md-t-0">
+      <%= collection_select(:game, :loser_id, @players, :id, :full_name, prompt: true) %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+    <%= form.label "Player 1's Score", class: "form-label mg-b-0" %>
+    </div>
+    <div class="col-md-8 mg-t-5 mg-md-t-0">
+      <%= form.number_field :winner_score %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+    <%= form.label "Player 2's Score", class: "form-label mg-b-0" %>
+    </div>
+    <div class="col-md-8 mg-t-5 mg-md-t-0">
+      <%= form.number_field :loser_score %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= form.submit%>
+  </div>
+<% end %>
+<script>
+$("#game_winner_id").on("change", function() {
+  let $boxval = $("#game_winner_id").val();
+
+  $("#game_loser_id > option").each(function(ind) {
+    let ele = $("#game_loser_id > option").eq(ind);
+    if (ele.val() === $boxval) ele.attr("disabled", "disabled");
+    else ele.removeAttr("disabled");
+  });
+});
+
+$("#game_loser_id").on("change", function() {
+  let $boxval = $("#game_loser_id").val();
+
+  $("#game_winner_id > option").each(function(ind) {
+    let ele = $("#game_winner_id > option").eq(ind);
+    if (ele.val() === $boxval) ele.attr("disabled", "disabled");
+    else ele.removeAttr("disabled");
+  });
+})
+</script>
